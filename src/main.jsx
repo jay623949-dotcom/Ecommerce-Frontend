@@ -7,19 +7,31 @@ import Header from './components/Header.jsx';
 import Footer from './components/Footer.jsx';
 import Home from './components/Home.jsx';
 import About from './components/About.jsx';
+import Register from './auth-components/Register.jsx';
+import VerifyOtp from './auth-components/VerifyOtp.jsx';
 
 
 
-const router = createBrowserRouter([{
-    path : "/",
-    element : <Layout />,
-    children : [
-      {path : "Home", element : <Home />},
-      {path : "About", element: <About />}
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
+      { index: true, element: <Home /> },
+      { path: "home", element: <Home /> },
+      { path: "about", element: <About /> },
     ],
+  },
+  {
+    path: "/register",
+    element: <Register />,
+  },
+  {
+    path: "/verify-otp",
+    element: <VerifyOtp />
   }
-]
-);
+]);
+ 
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
