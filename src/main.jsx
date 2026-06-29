@@ -9,7 +9,8 @@ import Home from './components/Home.jsx';
 import About from './components/About.jsx';
 import Register from './auth-components/Register.jsx';
 import VerifyOtp from './auth-components/VerifyOtp.jsx';
-
+import Login from './auth-components/Login.jsx';
+import { AuthProvider } from './context/AuthContext.jsx';
 
 
 const router = createBrowserRouter([
@@ -29,12 +30,18 @@ const router = createBrowserRouter([
   {
     path: "/verify-otp",
     element: <VerifyOtp />
+  },
+  {
+    path: "/login",
+    element: <Login />
   }
 ]);
  
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </StrictMode>,
 )

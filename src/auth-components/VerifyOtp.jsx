@@ -10,8 +10,7 @@ function VerifyOTP() {
     useState(false);
   const [error, setError] =
     useState("");
-  const [timeLeft, setTimeLeft] =
-    useState(600);
+ 
 
   const inputRefs = useRef([]);
   const location = useLocation();
@@ -19,27 +18,6 @@ function VerifyOTP() {
 
   const email =
     location.state?.email || "";
-
-  // TIMER
-  useEffect(() => {
-    if (timeLeft <= 0) return;
-
-    const timer = setInterval(() => {
-      setTimeLeft(
-        (prev) => prev - 1
-      );
-    }, 1000);
-
-    return () =>
-      clearInterval(timer);
-  }, [timeLeft]);
-
-  const minutes = Math.floor(
-    timeLeft / 60
-  );
-
-  const seconds =
-    timeLeft % 60;
 
   // INPUT CHANGE
   const handleChange = (
@@ -219,14 +197,7 @@ function VerifyOTP() {
           </div>
 
           <p className="text-center text-slate-500 mt-5">
-            OTP expires in{" "}
-            {minutes}:
-            {seconds
-              .toString()
-              .padStart(
-                2,
-                "0"
-              )}
+            OTP expires in 10 minutes
           </p>
 
           {error && (
