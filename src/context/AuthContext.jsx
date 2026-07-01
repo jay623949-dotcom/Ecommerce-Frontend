@@ -3,6 +3,7 @@ import {
   useContext,
   useState,
 } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
@@ -41,7 +42,6 @@ export function AuthProvider({ children }) {
     localStorage.removeItem(
       "userId"
     );
-
     setIsAuthenticated(false);
   };
 
