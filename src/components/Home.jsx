@@ -39,6 +39,28 @@ export default function Home() {
     fetchProducts(0);
   }, []);
 
+  const increase = async (id) => {
+  try {
+    await api.post(
+      `/Cart/increase?id=${id}&quantity=1`
+    );
+    fetchProducts();
+  } catch (err) {
+    console.log(err);
+  }
+  };
+
+  const decrease = async (id) => {
+  try {
+    await api.post(
+      `/Cart/decrease?id=${id}&quantity=1`
+    );
+    fetchProducts();
+  } catch (err) {
+    console.log(err);
+  }
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-slate-50">
       <main className="flex-1">

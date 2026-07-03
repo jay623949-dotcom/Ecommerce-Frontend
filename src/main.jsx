@@ -11,7 +11,8 @@ import Register from './auth-components/Register.jsx';
 import VerifyOtp from './auth-components/VerifyOtp.jsx';
 import Login from './auth-components/Login.jsx';
 import { AuthProvider } from "./context/AuthContext";
-import LoginLayout from "./LoginLayout.jsx"
+import LoginLayout from "./LoginLayout.jsx";
+import Cart from './components/Cart.jsx';
 
 
 const router = createBrowserRouter([
@@ -22,7 +23,7 @@ const router = createBrowserRouter([
       { index: true, element: <Home /> },
       { path: "home", element: <Home /> },
       { path: "about", element: <About /> },
-      
+      {path : "/cart",element : <Cart /> }
     ],
   },
   {
@@ -36,7 +37,7 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <LoginLayout />
-  }
+  },
 ]);
  
 

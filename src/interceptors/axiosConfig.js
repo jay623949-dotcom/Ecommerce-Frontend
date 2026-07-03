@@ -36,14 +36,11 @@ api.interceptors.response.use(
       }
 
       try {
-        console.log("🚀 Refreshing Access Token...");
-        
-        // Hamesha direct generic axios use karo refresh ke liye taaki purane kharab headers na jayein
         const res = await axios.post("http://localhost:8080/auth/refresh", {
           token: storedRefreshToken  // Sahi se object payload bheja
         });
 
-        console.log("✅ New Token Received from backend:", res.data);
+
 
         // Backend response check karo: res.data.jwtToken hai ya res.data.accessToken?
         const newAccessToken = res.data.jwtToken || res.data.accessToken; 
