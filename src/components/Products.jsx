@@ -1,16 +1,18 @@
-import React, {
-  useEffect,
-  useState,
-} from "react";
-import { Link } from "react-router-dom";
-import ProductGrid from "../reusable-components/ProductGrid";
-import Pagination from "../reusable-components/Pagination";
-import api from "../interceptors/axiosConfig";
-import { useAuth } from "../context/AuthContext";
+import React, { useEffect, useState, useCallback } from 'react';
+import api from '../interceptors/axiosConfig';
+import { useSearchParams } from 'react-router-dom';
+import ProductGrid from '../reusable-components/ProductGrid';
+import ProductCard from '../reusable-components/ProductCard';
+import Pagination from '../reusable-components/Pagination';
+import { SearchX } from "lucide-react";
 
-export default function Home() {
+
+function Products() {
+  const [params,setParams] = useSearchParams();
+  const name = params.get("name") || "";
+  const page = Number(params.get("page")) || 0;
   const [products, setProducts] = useState([]);
-  const [currentPage, setCurrentPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(page);
   const [totalPages, setTotalPages] = useState(0);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -21,7 +23,7 @@ export default function Home() {
       setError("");
 
       const res = await api.get(
-        `/Greet/getall?page=${page}`
+        `/Greet/search/filter?${params.toString()}`
       );
 
       setProducts(res.data.content);
@@ -33,35 +35,14 @@ export default function Home() {
     } finally {
       setLoading(false);
     }
-  };
+    };
 
-  useEffect(() => {
-    fetchProducts(0);
-  }, []);
-
-  const increase = async (id) => {
-  try {
-    await api.post(
-      `/Cart/increase?id=${id}&quantity=1`
-    );
-    fetchProducts();
-  } catch (err) {
-    console.log(err);
-  }
-  };
-
-  const decrease = async (id) => {
-  try {
-    await api.post(
-      `/Cart/decrease?id=${id}&quantity=1`
-    );
-    fetchProducts();
-  } catch (err) {
-    console.log(err);
-  }
-  };
+    useEffect(() => {
+        fetchProducts(currentPage);
+    }, [name,currentPage]);
 
   return (
+
     <div className="min-h-screen flex flex-col bg-slate-50">
       <main className="flex-1">
         
@@ -79,7 +60,7 @@ export default function Home() {
             </h1>
 
             <p className="text-blue-100 text-lg md:text-xl">
-              Best deals on electronics, fashion & more
+              Your results for "{name}"
             </p>
           </div>
         </div>
@@ -90,7 +71,7 @@ export default function Home() {
             <p className="text-red-500 text-lg">{error}</p>
             <br />
             <button
-          onClick={fetchProducts}
+          onClick={() => fetchProducts(currentPage)}
           className="
             px-6 py-3 rounded-xl
             bg-gradient-to-r
@@ -110,6 +91,21 @@ export default function Home() {
           <div className="text-center mt-10 text-slate-600">
             Loading products...
           </div>
+        ) : products.length === 0 ? (
+          <div className="flex justify-center py-20">
+    <div className="bg-white rounded-2xl shadow-md border border-slate-200 px-10 py-12 text-center max-w-md">
+    <SearchX className="mx-auto h-16 w-16 text-slate-400" />
+
+    <h2 className="mt-4 text-3xl font-bold text-slate-700">
+      No Products Found
+    </h2>
+
+    <p className="mt-3 text-slate-500">
+      We couldn't find any products matching your search.
+      Try using different keywords.
+    </p>
+    </div>
+    </div>
         ) : (
           <>
             <ProductGrid products={products} />
@@ -127,3 +123,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default Products;

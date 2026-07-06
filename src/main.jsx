@@ -13,6 +13,7 @@ import Login from './auth-components/Login.jsx';
 import { AuthProvider } from "./context/AuthContext";
 import LoginLayout from "./LoginLayout.jsx";
 import Cart from './components/Cart.jsx';
+import Products from './components/Products.jsx';
 
 
 const router = createBrowserRouter([
@@ -23,7 +24,8 @@ const router = createBrowserRouter([
       { index: true, element: <Home /> },
       { path: "home", element: <Home /> },
       { path: "about", element: <About /> },
-      {path : "/cart",element : <Cart /> }
+      {path : "/cart",element : <Cart /> },
+      {path : "/products", element : <Products />}
     ],
   },
   {

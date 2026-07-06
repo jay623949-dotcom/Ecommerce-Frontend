@@ -3,13 +3,17 @@ import {
   ShoppingCart,
   Filter,
 } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useCart } from "../context/CartContext";
 
 
 function Header() {
+
+  const [name,setName] = useState("");
+
+
   const { isAuthenticated, logout } = useAuth();
   const navigate = useNavigate();
 
@@ -18,6 +22,14 @@ function Header() {
     logout();
     navigate("/login");
   };
+
+  const handleSearch = () =>{
+    if(name.trim() === "") return ;
+    const params = new URLSearchParams();
+    params.set("name",name);
+    params.set("page",0);
+    navigate(`/products?${params.toString()}`);
+  }
 
   const {cartCount} = useCart();
 
@@ -42,12 +54,21 @@ function Header() {
             <div className="relative">
               <Search
                 size={22}
+                onClick={handleSearch}
                 className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400"
               />
 
               <input
                 type="text"
                 placeholder="Search for products..."
+                value = {name}
+                onChange={(e) => setName(e.target.value)}
+                onKeyDown = {(e) =>{ 
+                    if(e.key === "Enter"){
+                      handleSearch();
+                    }
+                  }
+                }
                 className="w-full rounded-full border border-slate-300 bg-white py-3 pl-14 pr-5 text-lg outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-200 transition"
               />
             </div>
