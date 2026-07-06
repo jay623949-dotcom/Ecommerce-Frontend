@@ -4,15 +4,16 @@ import {
   Filter,
 } from "lucide-react";
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate,useLocation, useLoaderData } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useCart } from "../context/CartContext";
+import FilterSidebar from "./FilterSidebar";
 
 
 function Header() {
 
   const [name,setName] = useState("");
-
+  const location = useLocation();
 
   const { isAuthenticated, logout } = useAuth();
   const navigate = useNavigate();
@@ -51,37 +52,53 @@ function Header() {
 
           {/* Search */}
           <div className="flex-1 max-w-3xl">
-            <div className="relative">
-              <Search
-                size={22}
-                onClick={handleSearch}
-                className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400"
-              />
+  <div className="relative">
 
-              <input
-                type="text"
-                placeholder="Search for products..."
-                value = {name}
-                onChange={(e) => setName(e.target.value)}
-                onKeyDown = {(e) =>{ 
-                    if(e.key === "Enter"){
-                      handleSearch();
-                    }
-                  }
-                }
-                className="w-full rounded-full border border-slate-300 bg-white py-3 pl-14 pr-5 text-lg outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-200 transition"
-              />
-            </div>
-          </div>
+    <input
+      type="text"
+      placeholder="Search for products..."
+      value={name}
+      onChange={(e) => setName(e.target.value)}
+      onKeyDown={(e) => {
+        if (e.key === "Enter") {
+          handleSearch();
+        }
+      }}
+      className="w-full rounded-full border border-slate-300 bg-white py-3 pl-6 pr-16 text-lg outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-200 transition"
+    />
+
+    <button
+      onClick={handleSearch}
+      className="
+        absolute
+        right-2
+        top-1/2
+        -translate-y-1/2
+        h-11
+        w-11
+        rounded-full
+        bg-blue-600
+        text-white
+        flex
+        items-center
+        justify-center
+        shadow-md
+        hover:bg-blue-700
+        hover:shadow-lg
+        active:scale-95
+        active:bg-blue-800
+        transition-all
+        duration-150
+      "
+    >
+      <Search size={20} />
+    </button>
+
+  </div>
+</div>
 
           {/* Right Section */}
           <div className="flex items-center gap-6">
-
-            <button className="flex items-center gap-2 text-slate-700 font-medium hover:text-blue-600 transition">
-              <Filter size={20} />
-              Filters
-            </button>
-
             {/* AUTH BUTTONS */}
             {isAuthenticated ? (
               <button
