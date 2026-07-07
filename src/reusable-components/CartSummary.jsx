@@ -1,6 +1,18 @@
-import React from 'react'
+import React from 'react';
+import api from '../interceptors/AxiosConfig';
 
 function CartSummary({ total }) {
+  const handleCheckout = async () => {
+    try {
+        const res = await api.post("/payment/checkout");
+
+        window.location.href = res.data.checkout_url;
+    } catch (err) {
+        console.error(err);
+        alert("Unable to start checkout");
+    }
+  };
+
   return (
     <div className="bg-white rounded-3xl shadow-lg p-8 border border-slate-100">
   <h2 className="text-2xl font-bold text-slate-800 mb-6">
@@ -38,6 +50,7 @@ function CartSummary({ total }) {
       hover:scale-[1.02]
       transition
     "
+    onClick={handleCheckout}
   >
     Proceed to Checkout
   </button>

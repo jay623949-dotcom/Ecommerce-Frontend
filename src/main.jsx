@@ -14,6 +14,8 @@ import { AuthProvider } from "./context/AuthContext";
 import LoginLayout from "./LoginLayout.jsx";
 import Cart from './components/Cart.jsx';
 import Products from './components/Products.jsx';
+import PaymentSuccess from './components/PaymentSuccess.jsx';
+import PaymentCancel from './components/PaymentCancel.jsx'
 
 
 const router = createBrowserRouter([
@@ -40,6 +42,14 @@ const router = createBrowserRouter([
     path: "/login",
     element: <LoginLayout />
   },
+  {
+    path: "/payment/success",
+    element: <PaymentSuccess />
+  },
+  {
+    path: "/payment/cancel",
+    element: <PaymentCancel />
+  }
 ]);
  
 

@@ -3,7 +3,7 @@ import {
   ShoppingCart,
   Filter,
 } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate,useLocation, useLoaderData } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useCart } from "../context/CartContext";
@@ -32,7 +32,11 @@ function Header() {
     navigate(`/products?${params.toString()}`);
   }
 
-  const {cartCount} = useCart();
+  const {cartCount,fetchCartCount} = useCart();
+
+  useEffect(() => {
+    fetchCartCount();
+  },[])
 
   return (
     <header className="sticky top-0 z-50 bg-slate-50 shadow-sm border-b border-slate-200">
