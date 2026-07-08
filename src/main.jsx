@@ -16,6 +16,7 @@ import Cart from './components/Cart.jsx';
 import Products from './components/Products.jsx';
 import PaymentSuccess from './components/PaymentSuccess.jsx';
 import PaymentCancel from './components/PaymentCancel.jsx'
+import Product from './components/Product.jsx';
 
 
 const router = createBrowserRouter([
@@ -27,7 +28,8 @@ const router = createBrowserRouter([
       { path: "home", element: <Home /> },
       { path: "about", element: <About /> },
       {path : "/cart",element : <Cart /> },
-      {path : "/products", element : <Products />}
+      {path : "/products", element : <Products />},
+      {path : "/product/:id", element : <Product />}
     ],
   },
   {
