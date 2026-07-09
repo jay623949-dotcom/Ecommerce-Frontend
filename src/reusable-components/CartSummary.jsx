@@ -1,5 +1,5 @@
 import React from 'react';
-import api from '../interceptors/AxiosConfig';
+import api from '../interceptors/axiosConfig';
 
 function CartSummary({ total }) {
   const handleCheckout = async () => {
