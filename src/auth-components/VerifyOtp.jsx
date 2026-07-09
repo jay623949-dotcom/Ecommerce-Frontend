@@ -74,19 +74,14 @@ function VerifyOTP() {
         return;
       }
 
-      if (timeLeft <= 0) {
-        setError(
-          "OTP has expired."
-        );
-        return;
-      }
+      
 
       try {
         setLoading(true);
         setError("");
 
         await axios.post(
-          "http://localhost:8080/auth/verify",
+          "https://ecommerce-app-dty0.onrender.com/auth/verify",
           {
             email,
             otp: finalOtp,

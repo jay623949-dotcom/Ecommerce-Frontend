@@ -2,7 +2,7 @@ import axios from "axios";
 
 // Custom instance banana zaroori hai
 const api = axios.create({
-  baseURL: "http://localhost:8080",
+  baseURL: `https://ecommerce-app-dty0.onrender.com`,
 });
 
 // Request Interceptor: Jo har request mein token jodegan
@@ -17,7 +17,7 @@ api.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// Response Interceptor: Jo altered token hone par refresh chalayega
+
 api.interceptors.response.use(
   (response) => response,
   async (error) => {

@@ -23,7 +23,7 @@ function Register() {
   try {
   console.log("calling resend otp...");
   const res = await axios.post(
-    `http://localhost:8080/auth/resendotp?email=${storedEmail}`
+    `https://ecommerce-app-dty0.onrender.com?email=${storedEmail}`
   );
   console.log("SUCCESS:", res);
 
@@ -48,7 +48,7 @@ function Register() {
     setError("");
 
     try {
-      await axios.post("http://localhost:8080/auth/signup", {
+      await axios.post("https://ecommerce-app-dty0.onrender.com/auth/signup", {
         username,
         email,
         password,
