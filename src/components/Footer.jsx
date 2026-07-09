@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom";
 
 function Footer() {
   return (
@@ -35,7 +36,9 @@ function Footer() {
 
             <ul className="space-y-3">
               <li className="hover:text-blue-500 cursor-pointer transition">
+                <Link to = "/home">
                 Home
+                </Link>
               </li>
               <li className="hover:text-blue-500 cursor-pointer transition">
                 Products
@@ -57,7 +60,9 @@ function Footer() {
 
             <ul className="space-y-3">
               <li className="hover:text-blue-500 cursor-pointer transition">
+                <a href="jay623949@gmail.com">
                 Contact Us
+                </a>
               </li>
               <li className="hover:text-blue-500 cursor-pointer transition">
                 FAQs

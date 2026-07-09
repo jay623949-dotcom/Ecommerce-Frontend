@@ -16,6 +16,7 @@ function CartItem({
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
 
         {/* Left */}
+        <Link to={`/product/${item.id}`}>
         <div className="flex items-center gap-5">
           <img
             src={item.imageUrl}
@@ -99,6 +100,7 @@ function CartItem({
             ✕
           </button>
         </div>
+        </Link>
       </div>
     </div>
   );
