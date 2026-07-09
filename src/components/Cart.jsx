@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import api from "../interceptors/AxiosConfig";
+import api from "../interceptors/axiosConfig";
 import CartItem from "../reusable-components/CartItem";
 import CartSummary from "../reusable-components/CartSummary";
 import { useNavigate } from "react-router-dom";
