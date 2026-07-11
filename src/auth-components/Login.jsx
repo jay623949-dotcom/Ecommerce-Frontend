@@ -22,7 +22,7 @@ function Login() {
       setLoading(true);
 
       const res = await axios.post(
-        "http://localhost:8080/auth/login",
+        "https://ecommerce-app-dty0.onrender.com/auth/login",
         {
           username,
           password,
