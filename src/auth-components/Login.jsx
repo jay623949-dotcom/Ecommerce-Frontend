@@ -22,14 +22,15 @@ function Login() {
       setLoading(true);
 
       const res = await axios.post(
-        "https://ecommerce-app-dty0.onrender.com/auth/login",
+        "http://localhost:8080/auth/login",
         {
           username,
           password,
         }
       );
-      console.log(res.data.jwt);
-      login(res.data.jwt,res.data.refreshToken);
+      console.log(res.data);
+      const roles = res.data.authProviderTypes;
+      login(res.data.jwt,res.data.refreshToken,roles);
       console.log(localStorage.getItem("refreshToken"));
       if (res.data.id) {
         localStorage.setItem(

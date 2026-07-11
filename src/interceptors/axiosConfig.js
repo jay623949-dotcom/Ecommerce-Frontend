@@ -2,7 +2,7 @@ import axios from "axios";
 
 // Custom instance banana zaroori hai
 const api = axios.create({
-  baseURL: `https://ecommerce-app-dty0.onrender.com`,
+  baseURL: `https://jdcommerce-latest.onrender.com`,
 });
 
 // Request Interceptor: Jo har request mein token jodegan

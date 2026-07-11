@@ -31,7 +31,7 @@ function ProductCard({ product}) {
     {/* Image */}
     <div className="h-60 w-full bg-slate-100 overflow-hidden">
       <img
-        src={product.image}
+        src={product.imageName}
         alt={product.name}
         className="h-full w-full object-cover hover:scale-105 transition-transform duration-300"
       />

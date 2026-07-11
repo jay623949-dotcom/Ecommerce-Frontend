@@ -11,14 +11,44 @@ import {
   CheckCircle,
   XCircle,
   Minus,
-  Plus,
+  Plus,Pencil,Trash2
 } from "lucide-react";
+import {useNavigate} from "react-router-dom";
 
-function ProductDetails({ product }) {
+function ProductDetails({ product,isAdmin }) {
   const { fetchCartCount } = useCart();
 
   const [loading, setLoading] = useState(false);
   const [qty, setQty] = useState(1);
+
+  const [loading2,setLoading2] = useState(false);
+
+  const navigate = useNavigate();
+
+const deleteProduct = async () => {
+  if (!window.confirm("Are you sure you want to delete this product?")) {
+    return;
+  }
+
+  try {
+    setLoading2(true);
+
+    await api.delete(`/admin/delete/${product.id}`); // <-- apna endpoint rakh
+
+    toast.success("Product deleted successfully");
+
+    navigate("/home");
+
+  } catch (err) {
+    toast.error(
+      err.response?.data || "Failed to delete product"
+    );
+  } finally {
+    setLoading2(false);
+  }
+};
+
+  
 
   const addToCart = async () => {
     try {
@@ -49,7 +79,7 @@ function ProductDetails({ product }) {
           <div className="bg-slate-100 flex justify-center items-center p-10">
 
             <img
-              src={product.image}
+              src={product.imageName}
               alt={product.name}
               className="max-h-[550px] object-contain hover:scale-105 transition duration-300"
             />
@@ -217,6 +247,28 @@ function ProductDetails({ product }) {
             {loading ? "Adding..." : "Add to Cart"}
             </button>
             </div>
+
+            {isAdmin && (
+  <div className="grid grid-cols-2 gap-4 mt-5">
+
+    <button
+      onClick={() => navigate(`/edit/${product.id}`)}
+      className="flex items-center justify-center gap-2 bg-amber-500 hover:bg-amber-600 text-white py-4 rounded-xl font-semibold transition"
+    >
+      <Pencil size={18} />
+      Edit Product
+    </button>
+
+    <button
+      onClick={deleteProduct}
+      className="flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white py-4 rounded-xl font-semibold transition"
+    >
+      <Trash2 size={18} />
+      {loading2 ? "Deleting..." : "Delete"}
+    </button>
+
+  </div>
+)}
 
           </div>
 

@@ -2,6 +2,7 @@ import {
   Search,
   ShoppingCart,
   Filter,
+  CircleUser
 } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate,useLocation, useLoaderData } from "react-router-dom";
@@ -143,6 +144,16 @@ function Header() {
                </span>
                 )}
             </button>
+            </Link>
+
+            {/* Profile */}
+            <Link to="/profile">
+              <button className="p-2 rounded-full hover:bg-slate-100 transition">
+               <CircleUser
+                 size={30}
+                  className="text-slate-700"
+                />
+              </button>
             </Link>
 
           </div>

@@ -13,6 +13,10 @@ function Cart() {
   const [error, setError] = useState("");
   const {fetchCartCount} = useCart();
 
+  const hasUnavailable = cartItems.some(
+  item => !item.available
+  );
+
   const fetchCart = async () => {
     try {
       setLoading(true);
@@ -195,13 +199,14 @@ return (
                 onIncrease={increase}
                 onDecrease={decrease}
                 onRemove={remove}
+                available = {item.available}
               />
             ))}
           </div>
 
           {/* Summary */}
           <div className="lg:sticky lg:top-24 h-fit">
-            <CartSummary total={total} />
+            <CartSummary total={total} hasUnavailable = {hasUnavailable} />
           </div>
 
         </div>

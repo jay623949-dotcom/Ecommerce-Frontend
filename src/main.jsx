@@ -17,6 +17,10 @@ import Products from './components/Products.jsx';
 import PaymentSuccess from './components/PaymentSuccess.jsx';
 import PaymentCancel from './components/PaymentCancel.jsx'
 import Product from './components/Product.jsx';
+import Profile from './components/Profile.jsx';
+import AddProduct from './components/AddProduct.jsx';
+import { Edit } from 'lucide-react';
+import EditProduct from './components/EditProduct.jsx';
 
 
 const router = createBrowserRouter([
@@ -51,6 +55,18 @@ const router = createBrowserRouter([
   {
     path: "/payment/cancel",
     element: <PaymentCancel />
+  },
+  {
+    path : "/profile",
+    element : <Profile />
+  },
+  {
+    path : "/add",
+    element : <AddProduct />
+  },
+  {
+    path : "/edit/:id",
+    element : <EditProduct />
   }
 ]);
  

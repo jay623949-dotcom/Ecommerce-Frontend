@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 
+
 function Register() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -48,7 +49,7 @@ function Register() {
     setError("");
 
     try {
-      await axios.post("https://ecommerce-app-dty0.onrender.com/auth/signup", {
+      await api.post("https://ecommerce-app-dty0.onrender.com/auth/signup", {
         username,
         email,
         password,

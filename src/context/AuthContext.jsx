@@ -3,19 +3,22 @@ import {
   useContext,
   useState,
 } from "react";
-import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-  const [isAuthenticated, setIsAuthenticated] =
-    useState(
-      !!localStorage.getItem("accessToken")
-    );
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    !!localStorage.getItem("accessToken")
+  );
+
+  const [roles, setRoles] = useState([]);
+
+  const isAdmin = roles.includes("ADMIN");
 
   const login = (
     accessToken,
-    refreshToken
+    refreshToken,
+    roles
   ) => {
     localStorage.setItem(
       "accessToken",
@@ -28,21 +31,16 @@ export function AuthProvider({ children }) {
     );
 
     setIsAuthenticated(true);
+    setRoles(roles);
   };
 
   const logout = () => {
-    localStorage.removeItem(
-      "accessToken"
-    );
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("userId");
 
-    localStorage.removeItem(
-      "refreshToken"
-    );
-
-    localStorage.removeItem(
-      "userId"
-    );
     setIsAuthenticated(false);
+    setRoles([]);
   };
 
   return (
@@ -51,6 +49,8 @@ export function AuthProvider({ children }) {
         isAuthenticated,
         login,
         logout,
+        isAdmin,
+        roles,
       }}
     >
       {children}

@@ -90,7 +90,7 @@ export default function Home() {
             <p className="text-red-500 text-lg">{error}</p>
             <br />
             <button
-          onClick={fetchProducts}
+          onClick={() => fetchProducts(0)}
           className="
             px-6 py-3 rounded-xl
             bg-gradient-to-r

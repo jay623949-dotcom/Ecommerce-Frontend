@@ -1,7 +1,9 @@
 import React from 'react';
 import api from '../interceptors/axiosConfig';
 
-function CartSummary({ total }) {
+function CartSummary({ total,hasUnavailable }) {
+
+  
   const handleCheckout = async () => {
     try {
         const res = await api.post("/payment/checkout");
@@ -39,21 +41,32 @@ function CartSummary({ total }) {
   </div>
 
   <button
-    className="
-      w-full mt-8 py-3
-      rounded-xl
-      bg-gradient-to-r
-      from-blue-600
-      to-indigo-600
-      text-white
-      font-semibold
-      hover:scale-[1.02]
-      transition
-    "
-    onClick={handleCheckout}
-  >
-    Proceed to Checkout
-  </button>
+  className="
+    w-full mt-8 py-3
+    rounded-xl
+    bg-gradient-to-r
+    from-blue-600
+    to-indigo-600
+    text-white
+    font-semibold
+    hover:scale-[1.02]
+    transition
+    disabled:bg-slate-300
+    disabled:from-slate-300
+    disabled:to-slate-300
+    disabled:cursor-not-allowed
+    disabled:hover:scale-100
+  "
+  onClick={handleCheckout}
+  disabled={hasUnavailable}
+>
+  Proceed to Checkout
+</button>
+{hasUnavailable && (
+  <p className="text-red-500 text-sm mt-3 text-center">
+    Remove unavailable products before checkout
+  </p>
+)}
 </div>
   );
 }
